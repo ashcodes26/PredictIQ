@@ -1,0 +1,6 @@
+{
+  "summary": "Implementation plan for the NASA C-MAPSS Turbofan Predictive Maintenance Digital Twin and pitch-ready dashboard, featuring a dual delivery model with an interactive Mission Control dark HUD web cockpit and a fully self-contained Python PyTorch/Streamlit app.py script.",
+  "updatedAt": "2026-11-05T04:28:57.461100506Z",
+  "requestFeedback": true,
+  "userFacing": true
+}

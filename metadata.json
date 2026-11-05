@@ -1,0 +1,6 @@
+{
+  "name": "NASA C-MAPSS Turbofan Predictive Maintenance",
+  "description": "Industrial IoT Predictive Maintenance prototype with PyTorch Autoencoder and LSTM RUL models on NASA C-MAPSS turbofan benchmark.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

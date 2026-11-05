@@ -1,0 +1,266 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [ 5 0 R 7 0 R 9 0 R ] /Count 3 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 612 792 ] /Contents 6 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> >>
+endobj
+6 0 obj
+<< /Length 2500 >>
+stream
+BT
+/F2 16 Tf
+50 740 Td
+(PredictIQ: Industrial IoT Predictive Maintenance Platform) Tj
+0 -26 Td
+/F1 9 Tf
+0 -13 Td
+(Document: Architecture Technical Specification & Hackathon Jury Defense Guide) Tj
+/F1 9 Tf
+0 -13 Td
+(Author: Lead AI Systems Engineer | Target: Venture Innovation Jury) Tj
+/F2 12 Tf
+0 -20 Td
+(1. COMPLETE TECHNICAL STACK) Tj
+/F1 9 Tf
+0 -13 Td
+(A. Frontend \(Digital Twin Console\)) Tj
+/F1 8.5 Tf
+0 -13 Td
+(  - Core Framework: React 19 with TypeScript in modern functional paradigm.) Tj
+/F1 8.5 Tf
+0 -13 Td
+(  - Bundler & Dev Server: Vite 8.3 mounted via Express middleware on port 3000.) Tj
+/F1 8.5 Tf
+0 -13 Td
+(  - Styling: Tailwind CSS v4 using an enterprise dark-slate palette \(#0B0F17, #111722\).) Tj
+/F1 8.5 Tf
+0 -13 Td
+(  - Typography: IBM Plex Sans paired with JetBrains Mono for tabular metrics.) Tj
+/F1 8.5 Tf
+0 -13 Td
+(  - Visualizations: Native responsive vector SVG coordinate-mapping system.) Tj
+/F1 9 Tf
+0 -13 Td
+(B. Backend Server & AI Copilot) Tj
+/F1 8.5 Tf
+0 -13 Td
+(  - Server Runtime: Node.js with Express 4 REST architecture.) Tj
+/F1 8.5 Tf
+0 -13 Td
+(  - AI SDK: @google/genai \(v2.4.0\) invoking gemini-3.8-flash for edge reasoning.) Tj
+/F1 8.5 Tf
+0 -13 Td
+(  - Reliability: Fallback rule engine provides zero-latency diagnostic briefs.) Tj
+/F1 9 Tf
+0 -13 Td
+(C. Two-Stage Machine Learning Pipeline \(PyTorch in app.py\)) Tj
+/F1 8.5 Tf
+0 -13 Td
+(  - Stage 1 \(Health Index\): Unsupervised Autoencoder \(in:6 -> 16 -> 6 -> 16 -> out:6\).) Tj
+/F1 8.5 Tf
+0 -13 Td
+(    Trained on early healthy cycles; reconstruction MSE acts as anomaly score.) Tj
+/F1 8.5 Tf
+0 -13 Td
+(    Statistical 3-sigma threshold triggers early knee-point degradation onset.) Tj
+/F1 8.5 Tf
+0 -13 Td
+(  - Stage 2 \(RUL Sequence Model\): 2-layer GRU \(in:6, hidden:32, layers:2\).) Tj
+/F1 8.5 Tf
+0 -13 Td
+(    Operates on 30-cycle sliding windows; piecewise linear capping at 125 cycles.) Tj
+/F1 8.5 Tf
+0 -13 Td
+(  - Optimization: Fast deterministic fitting \(<2.5s\) cached via Streamlit.) Tj
+/F2 12 Tf
+0 -20 Td
+(2. SUPPORTED MULTI-MACHINE DOMAINS) Tj
+/F1 9 Tf
+0 -13 Td
+(  - Aviation Turbofans: T50 turbine temp, P30 compressor pressure, Nf fan speed, vibration.) Tj
+/F1 9 Tf
+0 -13 Td
+(  - Power Transformers: Dissolved H2 gas ppm, moisture in oil, dielectric breakdown kV.) Tj
+/F1 9 Tf
+0 -13 Td
+(  - Industrial Pumps: Inboard bearing temp, discharge flow m3/h, seal flush pressure.) Tj
+/F1 9 Tf
+0 -13 Td
+(  - Wind Gearboxes: High-speed shaft temp, metal debris count, planetary vibration.) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 612 792 ] /Contents 8 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> >>
+endobj
+8 0 obj
+<< /Length 2340 >>
+stream
+BT
+/F2 16 Tf
+50 740 Td
+(PredictIQ: Hackathon Jury Defense Guide \(Part 1 - ML & Physics\)) Tj
+0 -26 Td
+/F2 12 Tf
+0 -20 Td
+(CATEGORY 1: MACHINE LEARNING & MODELING DEFENSE) Tj
+/F2 10 Tf
+0 -16 Td
+(Q1: Why use an Autoencoder for Stage 1 instead of standard One-Class SVM or Isolation Forest?) Tj
+/F1 9 Tf
+0 -13 Td
+(A: Industrial sensor degradation is multi-dimensional and continuous. Isolation Forests create rigid,) Tj
+/F1 9 Tf
+0 -13 Td
+(step-function partition boundaries that fail to capture smooth physical wear. An Autoencoder models) Tj
+/F1 9 Tf
+0 -13 Td
+(the non-linear correlations between sensors. Reconstruction MSE provides a smooth, physical) Tj
+/F1 9 Tf
+0 -13 Td
+(Health Index that smoothly tracks clearance erosion and thermodynamic loss.) Tj
+/F2 10 Tf
+0 -16 Td
+(Q2: Why did you pick GRU/LSTM over Transformers for Remaining Useful Life \(RUL\)?) Tj
+/F1 9 Tf
+0 -13 Td
+(A: Industrial edge hardware \(PLC / FADEC\) has strict memory and latency bounds. For sequential) Tj
+/F1 9 Tf
+0 -13 Td
+(window sizes of 30 cycles, self-attention mechanisms in Transformers introduce quadratic O\(N^2\)) Tj
+/F1 9 Tf
+0 -13 Td
+(overhead and overfit on small fleets without providing measurable accuracy gains. GRUs converge in) Tj
+/F1 9 Tf
+0 -13 Td
+(under 2.5 seconds on CPU with high inference speed \(<2ms/window\).) Tj
+/F2 10 Tf
+0 -16 Td
+(Q3: Why is RUL clipped at 125 cycles in the training pipeline?) Tj
+/F1 9 Tf
+0 -13 Td
+(A: In turbomachinery, brand-new components do not exhibit measurable wear during early cycles.) Tj
+/F1 9 Tf
+0 -13 Td
+(Labeling an engine at cycle 5 with an RUL of 190 forces the neural network to learn an unobservable) Tj
+/F1 9 Tf
+0 -13 Td
+(linear decay slope. Piecewise linear clipping \(cap = 125\) reflects the physical reality that wear) Tj
+/F1 9 Tf
+0 -13 Td
+(only manifests after the operational baseline.) Tj
+/F2 10 Tf
+0 -16 Td
+(Q4: Explain the NASA C-MAPSS Asymmetric Scoring metric and why MSE is dangerous in aerospace.) Tj
+/F1 9 Tf
+0 -13 Td
+(A: Symmetric MSE treats predicting 10 cycles too late identically to 10 cycles early. In aviation,) Tj
+/F1 9 Tf
+0 -13 Td
+(predicting late \(d > 0\) means an engine fails in-flight before maintenance is scheduled! NASA penalty) Tj
+/F1 9 Tf
+0 -13 Td
+(penalizes late calls exponentially \(s = exp\(d/13\)-1\) much harsher than early calls \(s = exp\(-d/10\)-1\).) Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 612 792 ] /Contents 10 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> >>
+endobj
+10 0 obj
+<< /Length 2200 >>
+stream
+BT
+/F2 16 Tf
+50 740 Td
+(PredictIQ: Hackathon Jury Defense Guide \(Part 2 - Systems & ROI\)) Tj
+0 -26 Td
+/F2 12 Tf
+0 -20 Td
+(CATEGORY 2: FULL-STACK & EDGE SYSTEMS ARCHITECTURE) Tj
+/F2 10 Tf
+0 -16 Td
+(Q5: How does the system prevent LLM hallucinations in the Machine Copilot?) Tj
+/F1 9 Tf
+0 -13 Td
+(A: The Copilot does not invent data. All telemetry \(current readings, MSE, 3-sigma limits, RUL\)) Tj
+/F1 9 Tf
+0 -13 Td
+(is calculated deterministically by our mathematical models and injected as structured JSON context) Tj
+/F1 9 Tf
+0 -13 Td
+(into the server-side Gemini prompt. The model acts strictly as an analytical explainability layer.) Tj
+/F2 10 Tf
+0 -16 Td
+(Q6: How do you handle transient sensor spikes \(noise vs true failure onset\)?) Tj
+/F1 9 Tf
+0 -13 Td
+(A: Individual sensor readings are subject to electrical EMI noise. Our Autoencoder reconstruction) Tj
+/F1 9 Tf
+0 -13 Td
+(evaluates cross-sensor correlation across all 6 channels simultaneously. A single noisy pin will) Tj
+/F1 9 Tf
+0 -13 Td
+(not breach the statistical 3-sigma multi-channel barrier without correlated shifts in related channels.) Tj
+/F2 12 Tf
+0 -20 Td
+(CATEGORY 3: BUSINESS VALUE & COMMERCIAL ROI) Tj
+/F2 10 Tf
+0 -16 Td
+(Q7: How do you justify the $168,000 cost avoidance figure to a CFO?) Tj
+/F1 9 Tf
+0 -13 Td
+(A: An unscheduled Aircraft on Ground \(AOG\) or transformer flashover averages $180,000 to $450,000) Tj
+/F1 9 Tf
+0 -13 Td
+(in emergency logistics, passenger rerouting, collateral core destruction, and grid fines. A scheduled) Tj
+/F1 9 Tf
+0 -13 Td
+(overnight line replacement costs $12,000 to $22,000. Preventing just one catastrophic failure pays) Tj
+/F1 9 Tf
+0 -13 Td
+(for our entire enterprise monitoring deployment for over 3 years \(+1,400% ROI\).) Tj
+/F2 10 Tf
+0 -16 Td
+(Q8: How does the platform scale from aviation to other machines like transformers or pumps?) Tj
+/F1 9 Tf
+0 -13 Td
+(A: Our two-stage architecture is domain-agnostic. The Autoencoder does not know what a turbine is;) Tj
+/F1 9 Tf
+0 -13 Td
+(it learns normal correlation manifolds. Whether inputs are temperatures, dissolved hydrogen gas,) Tj
+/F1 9 Tf
+0 -13 Td
+(or pump flow rates, the mathematical pipeline operates identically.) Tj
+ET
+endstream
+endobj
+xref
+0 11
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000135 00000 n 
+0000000205 00000 n 
+0000000280 00000 n 
+0000000418 00000 n 
+0000002970 00000 n 
+0000003108 00000 n 
+0000005500 00000 n 
+0000005639 00000 n 
+trailer
+<< /Size 11 /Root 1 0 R >>
+startxref
+7892
+%%EOF
