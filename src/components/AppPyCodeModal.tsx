@@ -69,29 +69,29 @@ from sklearn.preprocessing import MinMaxScaler
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-      <div className="bg-[#0b0e17] border border-[#1e293b] rounded-xl w-full max-w-4xl max-h-[85vh] flex flex-col shadow-2xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/75 backdrop-blur-sm">
+      <div className="bg-gradient-to-b from-[#1b263b] to-[#141d2c] border border-slate-700/60 rounded-xl w-full max-w-4xl max-h-[85vh] flex flex-col shadow-2xl overflow-hidden">
         {/* Modal Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[#1e293b]">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-700/60 bg-gradient-to-r from-[#172235] to-[#1b273d]">
           <div className="flex items-center gap-2.5">
             <Terminal className="w-4 h-4 text-cyan-400" />
-            <h3 className="text-sm font-bold font-mono text-slate-100 uppercase tracking-wider">
+            <h3 className="text-sm font-bold font-mono text-white uppercase tracking-wider">
               Self-Contained Executable · app.py (Streamlit + PyTorch)
             </h3>
           </div>
           <button
             onClick={onClose}
-            className="p-1 text-slate-400 hover:text-slate-100 rounded hover:bg-slate-800 transition-colors"
+            className="p-1 text-slate-300 hover:text-white rounded-lg hover:bg-slate-700/50 transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Instructions banner */}
-        <div className="bg-[#07090e] px-6 py-3 border-b border-[#1e293b] flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-slate-300">
+        <div className="bg-[#121927] px-6 py-3 border-b border-slate-700/60 flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-slate-200">
           <div>
-            <span className="text-slate-500">Run locally: </span>
-            <code className="text-cyan-300 bg-[#0f172a] px-2 py-0.5 rounded border border-[#1e293b]">
+            <span className="text-slate-400">Run locally: </span>
+            <code className="text-cyan-300 bg-[#1b263b] px-2 py-0.5 rounded border border-slate-600/50">
               pip install streamlit torch plotly pandas numpy scikit-learn && streamlit run app.py
             </code>
           </div>
@@ -99,14 +99,14 @@ from sklearn.preprocessing import MinMaxScaler
           <div className="flex items-center gap-2">
             <button
               onClick={handleCopy}
-              className="flex items-center gap-1.5 px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-100 rounded text-xs transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1 bg-[#223048] hover:bg-[#2c3d5a] text-slate-100 rounded-lg text-xs transition-colors border border-slate-600/60 shadow-sm"
             >
               {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
               <span>{copied ? 'Copied' : 'Copy app.py'}</span>
             </button>
             <button
               onClick={handleDownload}
-              className="flex items-center gap-1.5 px-3 py-1 bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-semibold rounded text-xs transition-colors"
+              className="flex items-center gap-1.5 px-3.5 py-1 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-semibold rounded-lg text-xs transition-colors shadow-md"
             >
               <Download className="w-3.5 h-3.5" />
               <span>Download File</span>
@@ -115,7 +115,7 @@ from sklearn.preprocessing import MinMaxScaler
         </div>
 
         {/* Code Content */}
-        <div className="p-6 overflow-y-auto flex-1 font-mono text-xs text-slate-300 bg-[#07090e]">
+        <div className="p-6 overflow-y-auto flex-1 font-mono text-xs text-slate-200 bg-[#0e1624]">
           <pre className="whitespace-pre-wrap leading-relaxed select-all">
 {`# Setup: pip install streamlit torch plotly pandas numpy scikit-learn
 # Run: streamlit run app.py

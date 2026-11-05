@@ -28,17 +28,19 @@ export const CleanTopNav: React.FC<CleanTopNavProps> = ({
   const currentAsset = assets.find((a) => a.id === selectedAssetId) || assets[0];
 
   return (
-    <header className="border-b border-[#1e2638] bg-[#0d121c] px-6 py-3 sticky top-0 z-30">
+    <header className="border-b border-slate-700/60 bg-gradient-to-r from-[#172235]/95 via-[#1b263b]/95 to-[#172235]/95 backdrop-blur-md px-6 py-3 sticky top-0 z-30 shadow-lg shadow-black/10">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-6">
         {/* Left: Brand & Machine Asset Selector */}
         <div className="flex items-center gap-5">
           <div className="flex items-center gap-2.5 text-slate-100 font-semibold text-sm tracking-tight whitespace-nowrap">
-            <div className="w-6 h-6 rounded bg-blue-600/20 border border-blue-500/40 flex items-center justify-center text-blue-400">
-              <Activity className="w-3.5 h-3.5" />
+            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-500/25 to-indigo-500/20 border border-blue-400/40 flex items-center justify-center text-blue-400 shadow-inner">
+              <Activity className="w-4 h-4 text-blue-400" />
             </div>
-            <span>PredictIQ</span>
+            <span className="bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent font-bold">
+              PredictIQ
+            </span>
             <span className="text-slate-600 font-normal">/</span>
-            <span className="text-xs text-slate-400 font-normal">Asset Fleet</span>
+            <span className="text-xs text-slate-400 font-normal">Fleet Monitor</span>
           </div>
 
           {/* Machine Dropdown Selector */}
@@ -46,10 +48,10 @@ export const CleanTopNav: React.FC<CleanTopNavProps> = ({
             <select
               value={selectedAssetId}
               onChange={(e) => onSelectAsset(e.target.value)}
-              className="bg-[#151d2c] text-xs font-medium text-slate-200 border border-[#232d3f] rounded-lg pl-3 pr-8 py-1.5 focus:outline-none focus:border-blue-500 appearance-none cursor-pointer"
+              className="bg-[#1f2c42] text-xs font-medium text-slate-100 border border-slate-600/60 rounded-lg pl-3 pr-8 py-1.5 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400/30 appearance-none cursor-pointer shadow-sm hover:bg-[#263752] transition-colors"
             >
               {assets.map((asset) => (
-                <option key={asset.id} value={asset.id}>
+                <option key={asset.id} value={asset.id} className="bg-[#162030] text-slate-100">
                   {asset.name} ({asset.category})
                 </option>
               ))}
@@ -59,7 +61,7 @@ export const CleanTopNav: React.FC<CleanTopNavProps> = ({
 
           <button
             onClick={onOpenAddModal}
-            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs text-slate-300 hover:text-white bg-[#151d2c] hover:bg-[#1b2538] border border-[#232d3f] rounded-lg transition-colors whitespace-nowrap"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs text-slate-200 hover:text-white bg-[#1f2c42] hover:bg-[#283955] border border-slate-600/60 rounded-lg transition-colors whitespace-nowrap shadow-sm"
           >
             <Plus className="w-3.5 h-3.5 text-blue-400" />
             <span>Add Asset</span>
@@ -67,33 +69,33 @@ export const CleanTopNav: React.FC<CleanTopNavProps> = ({
         </div>
 
         {/* Center: Simplified Clean View Tabs */}
-        <div className="hidden md:flex items-center gap-1 bg-[#151d2c] p-1 rounded-lg border border-[#232d3f]">
+        <div className="hidden md:flex items-center gap-1 bg-[#131b29] p-1 rounded-lg border border-slate-700/60 shadow-inner">
           <button
             onClick={() => onSelectTab('overview')}
-            className={`px-3 py-1 text-xs font-medium rounded-md transition-colors ${
+            className={`px-3 py-1 text-xs font-medium rounded-md transition-all ${
               activeTab === 'overview'
-                ? 'bg-blue-600 text-white font-semibold'
-                : 'text-slate-400 hover:text-slate-200'
+                ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold shadow-sm'
+                : 'text-slate-300 hover:text-white hover:bg-slate-700/40'
             }`}
           >
             Health Overview
           </button>
           <button
             onClick={() => onSelectTab('models')}
-            className={`px-3 py-1 text-xs font-medium rounded-md transition-colors ${
+            className={`px-3 py-1 text-xs font-medium rounded-md transition-all ${
               activeTab === 'models'
-                ? 'bg-blue-600 text-white font-semibold'
-                : 'text-slate-400 hover:text-slate-200'
+                ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold shadow-sm'
+                : 'text-slate-300 hover:text-white hover:bg-slate-700/40'
             }`}
           >
             AI Diagnostics & RUL
           </button>
           <button
             onClick={() => onSelectTab('roi')}
-            className={`px-3 py-1 text-xs font-medium rounded-md transition-colors ${
+            className={`px-3 py-1 text-xs font-medium rounded-md transition-all ${
               activeTab === 'roi'
-                ? 'bg-blue-600 text-white font-semibold'
-                : 'text-slate-400 hover:text-slate-200'
+                ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold shadow-sm'
+                : 'text-slate-300 hover:text-white hover:bg-slate-700/40'
             }`}
           >
             Financial ROI
@@ -104,10 +106,10 @@ export const CleanTopNav: React.FC<CleanTopNavProps> = ({
         <div className="flex items-center gap-2.5">
           <button
             onClick={onToggleCopilot}
-            className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${
               isCopilotOpen
-                ? 'bg-blue-600 text-white border-blue-500 shadow-sm'
-                : 'bg-[#151d2c] text-slate-300 border-[#232d3f] hover:text-white'
+                ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white border-blue-500 shadow-md'
+                : 'bg-[#1f2c42] text-slate-200 border-slate-600/60 hover:text-white hover:bg-[#283955] shadow-sm'
             }`}
           >
             <Bot className="w-3.5 h-3.5" />
@@ -116,9 +118,9 @@ export const CleanTopNav: React.FC<CleanTopNavProps> = ({
 
           <button
             onClick={onOpenCodeModal}
-            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs text-slate-400 hover:text-slate-200 bg-[#151d2c] border border-[#232d3f] rounded-lg transition-colors"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs text-slate-300 hover:text-white bg-[#1f2c42] hover:bg-[#283955] border border-slate-600/60 rounded-lg transition-colors shadow-sm"
           >
-            <Code className="w-3.5 h-3.5" />
+            <Code className="w-3.5 h-3.5 text-indigo-400" />
             <span>app.py</span>
           </button>
         </div>

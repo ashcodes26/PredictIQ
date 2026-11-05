@@ -57,27 +57,27 @@ export const CleanAssetHero: React.FC<CleanAssetHeroProps> = ({
   const StatusIcon = statusBadge.icon;
 
   return (
-    <div className="bg-[#111722] border border-[#1e2638] rounded-xl p-6 shadow-sm">
+    <div className="bg-gradient-to-b from-[#1b2537]/90 to-[#151f30]/90 backdrop-blur-sm border border-slate-700/60 rounded-xl p-6 shadow-lg shadow-black/10">
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
         {/* Left: Asset Identity & Status */}
         <div>
           <div className="flex items-center gap-3 flex-wrap">
-            <span className="text-xs font-semibold px-2.5 py-0.5 rounded bg-[#1a2334] text-slate-300 border border-[#2a364f]">
+            <span className="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-[#223048] text-slate-200 border border-slate-600/50 shadow-sm">
               {asset.category}
             </span>
-            <span className="flex items-center gap-1 text-xs text-slate-400">
-              <MapPin className="w-3 h-3 text-slate-500" />
+            <span className="flex items-center gap-1 text-xs text-slate-300">
+              <MapPin className="w-3.5 h-3.5 text-blue-400" />
               <span>{asset.location}</span>
             </span>
             <span className="text-xs text-slate-500">·</span>
-            <span className="text-xs text-slate-400">
-              Priority: <strong className="text-slate-300 font-medium">{asset.criticality}</strong>
+            <span className="text-xs text-slate-300">
+              Priority: <strong className="text-slate-100 font-semibold">{asset.criticality}</strong>
             </span>
           </div>
 
           <div className="flex items-center gap-4 mt-2.5 flex-wrap">
-            <h1 className="text-2xl font-bold text-slate-100 tracking-tight">{asset.name}</h1>
-            <div className={`flex items-center gap-1.5 px-3 py-1 rounded-md border text-xs font-medium ${statusBadge.colorClass}`}>
+            <h1 className="text-2xl font-bold text-white tracking-tight">{asset.name}</h1>
+            <div className={`flex items-center gap-1.5 px-3 py-1 rounded-md border text-xs font-medium shadow-sm ${statusBadge.colorClass}`}>
               <StatusIcon className="w-3.5 h-3.5" />
               <span>{statusBadge.label}</span>
             </div>
@@ -85,7 +85,7 @@ export const CleanAssetHero: React.FC<CleanAssetHeroProps> = ({
         </div>
 
         {/* Right: Key 3 Vital Numbers */}
-        <div className="grid grid-cols-3 gap-6 pt-4 lg:pt-0 border-t lg:border-t-0 border-[#1e2638] lg:divide-x lg:divide-[#1e2638]">
+        <div className="grid grid-cols-3 gap-6 pt-4 lg:pt-0 border-t lg:border-t-0 border-slate-700/50 lg:divide-x lg:divide-slate-700/50">
           {/* Health Score */}
           <div className="lg:pl-6">
             <div className="text-[11px] font-medium text-slate-400 uppercase tracking-wider">
@@ -103,16 +103,16 @@ export const CleanAssetHero: React.FC<CleanAssetHeroProps> = ({
               >
                 {healthPercent}%
               </span>
-              <span className="text-xs text-slate-500">Nominal</span>
+              <span className="text-xs text-slate-400">Nominal</span>
             </div>
-            <div className="w-24 bg-[#1e2638] h-1.5 rounded-full mt-2 overflow-hidden">
+            <div className="w-24 bg-slate-700/60 h-1.5 rounded-full mt-2 overflow-hidden shadow-inner">
               <div
                 className={`h-full transition-all duration-300 ${
                   healthPercent > 60
-                    ? 'bg-emerald-500'
+                    ? 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]'
                     : healthPercent > 25
-                    ? 'bg-amber-500'
-                    : 'bg-rose-500'
+                    ? 'bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.5)]'
+                    : 'bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.5)]'
                 }`}
                 style={{ width: `${healthPercent}%` }}
               />

@@ -89,19 +89,19 @@ export const AddMachineModal: React.FC<AddMachineModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-      <div className="bg-[#111722] border border-[#232d3f] rounded-xl w-full max-w-xl flex flex-col shadow-2xl overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/75 backdrop-blur-sm">
+      <div className="bg-gradient-to-b from-[#1c273c] to-[#151f32] border border-slate-700/60 rounded-xl w-full max-w-xl flex flex-col shadow-2xl overflow-hidden">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[#232d3f] bg-[#0c1017]">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-700/60 bg-gradient-to-r from-[#172235] to-[#1b273d]">
           <div>
-            <h3 className="text-base font-semibold text-slate-100">Add Industrial Asset</h3>
-            <p className="text-xs text-slate-400 mt-0.5">
+            <h3 className="text-base font-semibold text-white">Add Industrial Asset</h3>
+            <p className="text-xs text-slate-300 mt-0.5">
               Deploy predictive maintenance monitoring to a new industrial machine
             </p>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 text-slate-400 hover:text-slate-200 rounded-lg hover:bg-slate-800 transition-colors"
+            className="p-1.5 text-slate-300 hover:text-white rounded-lg hover:bg-slate-700/50 transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
@@ -111,7 +111,7 @@ export const AddMachineModal: React.FC<AddMachineModalProps> = ({
         <form onSubmit={handleSubmit} className="p-6 space-y-5">
           {/* Machine Type Selector Cards */}
           <div>
-            <label className="block text-xs font-medium text-slate-300 mb-2">
+            <label className="block text-xs font-medium text-slate-200 mb-2">
               Select Machine Category
             </label>
             <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
@@ -130,13 +130,13 @@ export const AddMachineModal: React.FC<AddMachineModalProps> = ({
                     }}
                     className={`flex flex-col items-start p-3 rounded-lg border text-left transition-all ${
                       isSelected
-                        ? 'bg-blue-950/40 border-blue-500 text-blue-200'
-                        : 'bg-[#151d2c] border-[#232d3f] text-slate-300 hover:border-slate-600'
+                        ? 'bg-blue-900/40 border-blue-400 text-white shadow-md'
+                        : 'bg-[#1f2c42] border-slate-600/50 text-slate-200 hover:border-slate-500 shadow-sm'
                     }`}
                   >
                     <Icon className={`w-4 h-4 mb-2 ${isSelected ? 'text-blue-400' : 'text-slate-400'}`} />
                     <span className="text-xs font-semibold">{opt.label}</span>
-                    <span className="text-[10px] text-slate-400 mt-1 line-clamp-1">{opt.costInfo}</span>
+                    <span className="text-[10px] text-slate-300 mt-1 line-clamp-1">{opt.costInfo}</span>
                   </button>
                 );
               })}
@@ -146,7 +146,7 @@ export const AddMachineModal: React.FC<AddMachineModalProps> = ({
           {/* Machine Name & Location */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1.5">
+              <label className="block text-xs font-medium text-slate-200 mb-1.5">
                 Asset Name / Identifier
               </label>
               <input
@@ -154,12 +154,12 @@ export const AddMachineModal: React.FC<AddMachineModalProps> = ({
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder={machineOptions.find((m) => m.type === selectedType)?.defaultName}
-                className="w-full bg-[#0c1017] border border-[#232d3f] rounded-lg px-3 py-2 text-xs text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-blue-500"
+                className="w-full bg-[#121a28] border border-slate-600/60 rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-400 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400/30"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1.5">
+              <label className="block text-xs font-medium text-slate-200 mb-1.5">
                 Installation Location
               </label>
               <input
@@ -167,7 +167,7 @@ export const AddMachineModal: React.FC<AddMachineModalProps> = ({
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
                 placeholder={machineOptions.find((m) => m.type === selectedType)?.defaultLoc}
-                className="w-full bg-[#0c1017] border border-[#232d3f] rounded-lg px-3 py-2 text-xs text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-blue-500"
+                className="w-full bg-[#121a28] border border-slate-600/60 rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-400 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400/30"
               />
             </div>
           </div>
@@ -175,22 +175,22 @@ export const AddMachineModal: React.FC<AddMachineModalProps> = ({
           {/* Criticality & Lifecycle Horizon */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1.5">
+              <label className="block text-xs font-medium text-slate-200 mb-1.5">
                 Operational Criticality
               </label>
               <select
                 value={criticality}
                 onChange={(e) => setCriticality(e.target.value as any)}
-                className="w-full bg-[#0c1017] border border-[#232d3f] rounded-lg px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-blue-500"
+                className="w-full bg-[#121a28] border border-slate-600/60 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-400"
               >
-                <option value="Critical">Critical (Immediate Line Stoppage)</option>
-                <option value="High">High Priority (Redundant Failover)</option>
-                <option value="Medium">Medium (Auxiliary Support)</option>
+                <option value="Critical" className="bg-[#162030]">Critical (Immediate Line Stoppage)</option>
+                <option value="High" className="bg-[#162030]">High Priority (Redundant Failover)</option>
+                <option value="Medium" className="bg-[#162030]">Medium (Auxiliary Support)</option>
               </select>
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1.5">
+              <label className="block text-xs font-medium text-slate-200 mb-1.5">
                 Inspection Interval ({MACHINE_TYPE_TEMPLATES[selectedType].timeUnit})
               </label>
               <input
@@ -199,23 +199,23 @@ export const AddMachineModal: React.FC<AddMachineModalProps> = ({
                 max={400}
                 value={lifespan}
                 onChange={(e) => setLifespan(Number(e.target.value))}
-                className="w-full bg-[#0c1017] border border-[#232d3f] rounded-lg px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-blue-500"
+                className="w-full bg-[#121a28] border border-slate-600/60 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-400"
               />
             </div>
           </div>
 
           {/* Footer buttons */}
-          <div className="pt-3 border-t border-[#232d3f] flex items-center justify-end gap-3">
+          <div className="pt-3 border-t border-slate-700/60 flex items-center justify-end gap-3">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-xs font-medium text-slate-400 hover:text-slate-200 transition-colors"
+              className="px-4 py-2 text-xs font-medium text-slate-300 hover:text-white transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="flex items-center gap-1.5 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-medium transition-colors shadow-sm"
+              className="flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white rounded-lg text-xs font-medium transition-colors shadow-md"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Deploy Machine Monitor</span>

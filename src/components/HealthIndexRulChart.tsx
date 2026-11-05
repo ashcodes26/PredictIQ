@@ -73,7 +73,7 @@ export const HealthIndexRulChart: React.FC<HealthIndexRulChartProps> = ({
   const kneeX = xScale(kneePoint);
 
   return (
-    <div className="bg-[#111722] border border-[#1e2638] rounded-xl p-6 shadow-sm">
+    <div className="bg-gradient-to-b from-[#1b2537]/90 to-[#151f30]/90 backdrop-blur-sm border border-slate-700/60 rounded-xl p-6 shadow-lg shadow-black/10">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
         <div>
           <h2 className="text-sm font-semibold text-slate-100 tracking-tight">
@@ -106,7 +106,7 @@ export const HealthIndexRulChart: React.FC<HealthIndexRulChartProps> = ({
 
       {/* Top: Autoencoder MSE */}
       <div className="relative">
-        <div className="text-[11px] font-medium text-slate-400 mb-1.5 flex justify-between">
+        <div className="text-[11px] font-medium text-slate-300 mb-1.5 flex justify-between">
           <span>STAGE 1 · RECONSTRUCTION ERROR (ANOMALY INDEX)</span>
           <span className="text-blue-400 font-mono">
             Reading: {hoveredPoint.health_index_mse.toFixed(4)} MSE{' '}
@@ -116,7 +116,7 @@ export const HealthIndexRulChart: React.FC<HealthIndexRulChartProps> = ({
 
         <svg
           viewBox={`0 0 ${width} ${height1}`}
-          className="w-full h-auto bg-[#0c1017] border border-[#1e2638] rounded-lg overflow-hidden"
+          className="w-full h-auto bg-gradient-to-b from-[#121a28] to-[#0e1624] border border-slate-700/60 rounded-lg overflow-hidden shadow-inner"
           onMouseMove={(e) => {
             const rect = e.currentTarget.getBoundingClientRect();
             const relX = e.clientX - rect.left;
@@ -194,7 +194,7 @@ export const HealthIndexRulChart: React.FC<HealthIndexRulChartProps> = ({
 
         <svg
           viewBox={`0 0 ${width} ${height2}`}
-          className="w-full h-auto bg-[#0c1017] border border-[#1e2638] rounded-lg overflow-hidden"
+          className="w-full h-auto bg-gradient-to-b from-[#121a28] to-[#0e1624] border border-slate-700/60 rounded-lg overflow-hidden shadow-inner"
           onMouseMove={(e) => {
             const rect = e.currentTarget.getBoundingClientRect();
             const relX = e.clientX - rect.left;

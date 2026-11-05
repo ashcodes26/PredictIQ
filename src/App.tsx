@@ -65,7 +65,7 @@ export default function App() {
   }, [safeCycle, activePoint, currentAsset]);
 
   return (
-    <div className="min-h-screen bg-[#0b0f17] text-slate-100 flex flex-col font-sans selection:bg-blue-600 selection:text-white">
+    <div className="min-h-screen bg-transparent text-slate-100 flex flex-col font-sans selection:bg-blue-600 selection:text-white">
       {/* 1. Clean Top Navigation Bar */}
       <CleanTopNav
         assets={assets}
@@ -150,14 +150,14 @@ export default function App() {
         </div>
 
         {/* Quiet footer */}
-        <footer className="pt-6 pb-4 border-t border-[#1e2638] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        <footer className="pt-6 pb-4 border-t border-slate-700/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <div>
-            <span>PredictIQ Enterprise Fleet Condition Monitoring</span>
-            <span className="mx-2">·</span>
+            <span className="font-medium text-slate-300">PredictIQ Enterprise Fleet Condition Monitoring</span>
+            <span className="mx-2 text-slate-600">·</span>
             <span>{assets.length} Assets Registered</span>
           </div>
           <div>
-            <span>Stand-alone Python Benchmark: <code className="text-blue-400">app.py</code></span>
+            <span>Stand-alone Python Benchmark: <code className="text-blue-400 bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700/50">app.py</code></span>
           </div>
         </footer>
       </main>

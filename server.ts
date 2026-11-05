@@ -61,7 +61,7 @@ ${prompt}`;
       try {
         // Race Gemini call against a 6-second timeout for prompt responsiveness
         const geminiPromise = aiClient.models.generateContent({
-          model: 'gemini-3.8-flash',
+          model: 'gemini-2.5-flash',
           contents: fullContent,
           config: {
             systemInstruction,
@@ -105,6 +105,163 @@ ${prompt}`;
     console.error('Copilot API error:', error);
     return res.status(500).json({
       error: 'Failed to generate copilot analysis',
+      details: error.message || String(error),
+    });
+  }
+});
+
+// AI Sensor Anomaly Diagnostics API endpoint
+app.post('/api/anomaly/diagnose', async (req, res) => {
+  try {
+    const {
+      assetName = 'Asset',
+      assetType = 'turbofan',
+      category = 'Industrial Equipment',
+      currentCycle = 1,
+      maxLife = 100,
+      timeUnit = 'Cycles',
+      healthIndexMse = 0.003,
+      threshold3Sigma = 0.0082,
+      rulPred = 100,
+      sensors = [],
+    } = req.body;
+
+    const mseRatio = healthIndexMse / (threshold3Sigma || 0.0082);
+    const criticalSensors = sensors.filter((s: any) => Math.abs(Number(s.pctDelta)) > 20);
+    const warningSensors = sensors.filter((s: any) => Math.abs(Number(s.pctDelta)) > 8 && Math.abs(Number(s.pctDelta)) <= 20);
+    const hasAnomaly = healthIndexMse > threshold3Sigma || criticalSensors.length > 0 || warningSensors.length > 0;
+
+    const hasValidKey =
+      apiKey &&
+      apiKey !== 'MY_GEMINI_API_KEY' &&
+      !apiKey.startsWith('MY_') &&
+      apiKey.trim().length > 20;
+
+    if (aiClient && hasValidKey) {
+      try {
+        const prompt = `You are the lead AI Reliability & Sensor Diagnostics Specialist for Predictive Maintenance.
+Analyze the following machine telemetry for anomalies:
+Asset: ${assetName} (${category}, Type: ${assetType})
+Current Lifecycle: ${currentCycle}/${maxLife} ${timeUnit}
+Autoencoder Anomaly MSE: ${healthIndexMse} (3-sigma threshold: ${threshold3Sigma}, ratio: ${mseRatio.toFixed(2)}x)
+Estimated Remaining Useful Life (RUL): ${rulPred} ${timeUnit}
+
+Sensor Telemetry Readings:
+${sensors
+  .map(
+    (s: any) =>
+      `- ${s.name}: Current=${s.current} ${s.unit}, Baseline=${s.baseline} ${s.unit}, Delta=${s.delta > 0 ? '+' : ''}${s.delta} (${s.pctDelta}%)`
+  )
+  .join('\n')}
+
+Respond ONLY with valid JSON in this exact structure:
+{
+  "hasAnomaly": boolean,
+  "severity": "NOMINAL" | "DRIFT" | "WARNING" | "CRITICAL",
+  "headline": string,
+  "summary": string,
+  "anomalousSensors": [
+    { "name": string, "reading": string, "deviation": string, "concern": string }
+  ],
+  "physicalRootCause": string,
+  "recommendedAction": string
+}`;
+
+        const geminiPromise = aiClient.models.generateContent({
+          model: 'gemini-2.5-flash',
+          contents: prompt,
+          config: {
+            responseMimeType: 'application/json',
+          },
+        });
+
+        const timeoutPromise = new Promise<null>((_, reject) =>
+          setTimeout(() => reject(new Error('Timeout waiting for Gemini')), 5500)
+        );
+
+        const response: any = await Promise.race([geminiPromise, timeoutPromise]);
+        const text = response?.text?.trim();
+        if (text) {
+          const parsed = JSON.parse(text);
+          return res.json(parsed);
+        }
+      } catch (geminiErr: any) {
+        console.warn('Gemini anomaly diagnostic failed, using deterministic physics fallback:', geminiErr?.message);
+      }
+    }
+
+    // Deterministic High-Fidelity Physics Fallback
+    let severity: 'NOMINAL' | 'DRIFT' | 'WARNING' | 'CRITICAL' = 'NOMINAL';
+    let headline = 'Telemetry Nominal: All Channels Calibrated';
+    let summary = `${assetName} telemetry is operating within nominal statistical tolerances. Autoencoder reconstruction MSE (${healthIndexMse.toFixed(4)}) is below the 3-sigma alert threshold.`;
+    let physicalRootCause = 'Nominal thermal and aerodynamic equilibrium with baseline frictional wear.';
+    let recommendedAction = `Continue standard operations. Next routine telemetry inspection at cycle ${Math.min(maxLife, currentCycle + 20)}.`;
+
+    if (criticalSensors.length > 0 || mseRatio >= 2.0) {
+      severity = 'CRITICAL';
+      const sensorNames = criticalSensors.map((s: any) => s.name).join(', ') || 'multiple telemetry channels';
+      headline = `Critical Anomaly Breach Detected in ${sensorNames}`;
+      summary = `Severe sensor envelope departure detected at ${currentCycle} ${timeUnit}. Autoencoder anomaly MSE is ${mseRatio.toFixed(2)}x the 3-sigma threshold, indicating imminent component failure risk.`;
+      
+      if (assetType === 'turbofan') {
+        physicalRootCause = 'Severe thermal gas path breakdown, turbine blade creep, and compressor stall margin degradation.';
+        recommendedAction = 'Execute emergency borescope inspection, restrict flight envelope, and prepare for scheduled hot-section overhaul.';
+      } else if (assetType === 'transformer') {
+        physicalRootCause = 'High-energy electrical arcing and catastrophic dielectric breakdown of cellulose insulation.';
+        recommendedAction = 'Immediately isolate transformer bank, perform urgent DGA oil degassing, and test breakdown voltage.';
+      } else if (assetType === 'pump') {
+        physicalRootCause = 'Advanced bearing spalling, severe cavitation erosion, and mechanical seal fluid blowby.';
+        recommendedAction = 'Initiate hot-standby pump cutover immediately; pull pump for drive-end bearing and seal replacement.';
+      } else if (assetType === 'gearbox') {
+        physicalRootCause = 'High-speed pinion gear spalling with heavy metallic particulate contamination in the lubricating circuit.';
+        recommendedAction = 'Brake turbine rotor, flush lubricating circuit, and inspect planetary gear teeth with endoscope.';
+      } else {
+        physicalRootCause = 'Rotor shaft eccentricity and high-frequency stator core thermal overload.';
+        recommendedAction = 'De-rate generator load immediately and inspect journal bearing pedestals.';
+      }
+    } else if (warningSensors.length > 0 || healthIndexMse > threshold3Sigma) {
+      severity = 'WARNING';
+      const sensorNames = warningSensors.map((s: any) => s.name).join(', ') || 'telemetry sensors';
+      headline = `Degradation Drift Detected in ${sensorNames}`;
+      summary = `Sensor telemetry has begun diverging from calibrated baseline parameters (${mseRatio.toFixed(2)}x baseline MSE). Remaining useful life is ${Math.round(rulPred)} ${timeUnit}.`;
+      
+      if (assetType === 'turbofan') {
+        physicalRootCause = 'Early stage compressor fouling and gradual thermal barrier coating erosion.';
+        recommendedAction = 'Perform compressor wash during next turnaround and monitor vibration spectral harmonics.';
+      } else if (assetType === 'transformer') {
+        physicalRootCause = 'Thermal hotspot development causing localized oil decomposition and hydrogen gas accumulation.';
+        recommendedAction = 'Verify cooling fan operation, check oil radiator cleanliness, and log daily DGA gas trends.';
+      } else if (assetType === 'pump') {
+        physicalRootCause = 'Hydraulic suction throttling and incipient journal bearing wear.';
+        recommendedAction = 'Inspect suction strainer differential pressure and verify lube reservoir viscosity.';
+      } else {
+        physicalRootCause = 'Lubricant thermal degradation and early surface fatigue on transmission elements.';
+        recommendedAction = 'Schedule oil sample laboratory analysis and monitor high-frequency vibration.';
+      }
+    }
+
+    const anomalousSensorsList = sensors
+      .filter((s: any) => Math.abs(Number(s.pctDelta)) > 8)
+      .map((s: any) => ({
+        name: s.name,
+        reading: `${s.current} ${s.unit}`,
+        deviation: `${s.delta > 0 ? '+' : ''}${s.delta} (${s.pctDelta}%)`,
+        concern: Math.abs(Number(s.pctDelta)) > 20 ? 'Critical Envelope Breach' : 'Statistical Drift',
+      }));
+
+    return res.json({
+      hasAnomaly,
+      severity,
+      headline,
+      summary,
+      anomalousSensors: anomalousSensorsList,
+      physicalRootCause,
+      recommendedAction,
+    });
+  } catch (error: any) {
+    console.error('Anomaly diagnosis API error:', error);
+    return res.status(500).json({
+      error: 'Failed to diagnose sensor anomaly',
       details: error.message || String(error),
     });
   }
